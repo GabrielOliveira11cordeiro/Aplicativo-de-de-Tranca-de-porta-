@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1007472858002",
+    "project_id": "projetopo-14a17",
+    "storage_bucket": "projetopo-14a17.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1007472858002:android:2c70fb70d3b3eb66cae74b",
+        "android_client_info": {
+          "package_name": "com.unfio.Po6"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1007472858002-t3o45qegblfp9ltaovo8qi76cbipjiev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCW3kDT4GbjtNoohIJvLdM0NvSy13KVkeo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1007472858002-t3o45qegblfp9ltaovo8qi76cbipjiev.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1007472858002-4kf3kcdtoisbc3gs4cr8olt6b0m7mujb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Unifio.Po6"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
