@@ -1,10 +1,8 @@
 import { useRouter } from 'expo-router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import React, { useState } from 'react';
-import { Button, Text, TextInput, View } from 'react-native';
+import { useState } from 'react';
 import { auth, db } from '../../../config/firebaseConfig';
-import styles from './sLoginStyles';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState<string>('');
@@ -61,36 +59,4 @@ export default function LoginScreen() {
   };
 
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Faça seu Login</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="E-mail"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Senha"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <View style={styles.buttonContainer}>
-        <Button title="Entrar" onPress={handleLogin} color="#1E90FF" />
-      </View>
-      {statusMessage && (
-        <Text style={
-          { ...styles.statusMessage, 
-            color: statusMessage.startsWith('Erro') ? 'red' : 'green' 
-          }
-        }>
-          {statusMessage}
-        </Text>
-      )}
-    </View>
-  );
 }
