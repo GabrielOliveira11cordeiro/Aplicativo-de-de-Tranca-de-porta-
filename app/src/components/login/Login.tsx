@@ -1,9 +1,6 @@
+import { loginUser } from '@/app/services/LoginService';
 import { useRouter } from 'expo-router';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
 import { useState } from 'react';
-import { auth, db } from '../../../config/firebaseConfig';
-
 export default function LoginScreen() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -18,21 +15,13 @@ export default function LoginScreen() {
     }
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      
-      const docRef = doc(db, 'users', user.uid);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        const userData = docSnap.data();
-        if (userData.isAdmin) {
-          router.replace('./admin');
-        } else {
-          router.replace('../user');
-        }
+      const accessLevel = await loginUser(email, password);
+      if (accessLevel === 'admin') {
+        router.push('./admin/AdminHome');
+      } else if (accessLevel === 'user') {
+        router.push('./user/UserHome');
       } else {
-        router.replace('..');
+        setStatusMessage('Nível de acesso desconhecido. Contate o administrador.');
       }
 
     } catch (error: any) {
@@ -57,6 +46,6 @@ export default function LoginScreen() {
       setStatusMessage(`Erro: ${errorMessage}`);
     }
   };
-
-
+// Aqui fica codigo da tela de login
 }
+

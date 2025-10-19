@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from "../config/firebaseConfig";
+import { doc, getFirestore, setDoc } from "firebase/firestore";
+import { auth } from "../config/firebaseConfig";
 
 interface RegisterData {
     name: string;
@@ -11,12 +11,16 @@ interface RegisterData {
     password: string;
 }
 
-export const registerUserByadmin = async (email: string, password: string): Promise<void> => {
+export const registerUserByadmin = async (userData: RegisterData): Promise<void> => {
    try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const userCredential = await createUserWithEmailAndPassword(auth, userData.email, userData.password);
     const user = userCredential.user;
     await setDoc(doc(db, "users", user.uid), {
         email: user.email,
+        name: userData.name,
+        cpf: userData.cpf,
+        idade: userData.idade,
+        accessLevel: userData.accessLevel,
         createdAt: new Date(),
     });
     console.log("Usuário registrado com UID:", user.uid);
@@ -25,3 +29,4 @@ export const registerUserByadmin = async (email: string, password: string): Prom
     throw error;
    }
 };
+const db = getFirestore();
