@@ -1,4 +1,4 @@
-// src/navigation/AppNavigator.js
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -25,8 +25,8 @@ export default function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        <Stack.Screen name="Main" component={MainTabs} options={{ headerShown: false }} />
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: true }} />
+        <Stack.Screen name="Main" component={MainTabs} options={{ headerShown: true }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
