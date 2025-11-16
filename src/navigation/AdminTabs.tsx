@@ -3,10 +3,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // Telas do admin
-import CadastrarPorta from '../screens/CadastrarSala';
-import CadastrarUsuario from '../screens/CadastrarUsuario';
-import HistoricoPortas from '../screens/HistoricoPortas';
-import HomeAdmin from '../screens/HomeAdmin';
+import CadastrarPorta from '../screens/admin/CadastrarSala';
+import CadastrarUsuario from '../screens/admin/CadastrarUsuario';
+import HistoricoPortas from '../screens/admin/HistoricoPortas';
+import HomeAdmin from '../screens/admin/HomeAdmin';
 
 const Tab = createBottomTabNavigator();
 

@@ -1,5 +1,8 @@
+// src/screens/user/HomeUsuario.tsx
+
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
@@ -12,7 +15,7 @@ import {
 } from 'react-native';
 
 // Importa a função real
-import { buscarReservasDoUsuario } from '../services/HistoricoReserva';
+import { buscarReservasDoUsuario } from '../../services/HistoricoReserva';
 
 interface Reserva {
   id: string;
@@ -23,8 +26,21 @@ interface Reserva {
   status: 'Ativa' | 'Concluída' | 'Cancelada';
 }
 
+// 📌 TIPAGEM DO TAB NAVIGATOR (Deve refletir os nomes em UsuarioTabs.js)
+type UsuarioTabParamList = {
+  HomeUsuario: undefined;
+  ReservarPorta: undefined; // Nome correto da rota de reserva
+  HistoricoReservas: undefined; // Nome correto
+  NotificacaoReserva: undefined;
+  // Adicione a rota externa do Stack Navigator (Login)
+  Login: undefined; 
+};
+
+// Usamos NavigationProp pois estamos navegando DENTRO das tabs (e para fora, para o Login)
+type HomeUsuarioNavigationProp = NativeStackNavigationProp<UsuarioTabParamList & { Login: undefined }, 'HomeUsuario'>;
+
 export default function HomeUsuario() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<HomeUsuarioNavigationProp>();
   const [reservas, setReservas] = useState<Reserva[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -44,9 +60,14 @@ export default function HomeUsuario() {
     loadReservas();
   }, []);
 
-  const handleReservarPorta = () => navigation.navigate('Reservas' as never);
-  const handleHistorico = () => navigation.navigate('HistoricoReservas' as never);
-  const handleLogout = () => navigation.navigate('Login' as never);
+  // 💡 ATUALIZAÇÃO: Rota alterada de 'Reservar' para 'ReservarPorta'
+  const handleReservarPorta = () => navigation.navigate('ReservarPorta'); 
+  
+  // 💡 Rota 'HistoricoReservas' já estava correta.
+  const handleHistorico = () => navigation.navigate('HistoricoReservas');
+  
+  // 💡 Navegando para o Login (assumindo que ele está fora do Tab Navigator, em um Stack)
+  const handleLogout = () => navigation.navigate('Login');
 
   if (loading) {
     return (

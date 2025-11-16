@@ -3,12 +3,12 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
-    Image,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 // Certifique-se de que o caminho para AppNavigator está correto
 import { RootStackParamList } from '../navigation/AppNavigator';
@@ -71,173 +71,138 @@ export default function LoginScreen() {
     }
   };
 
- return (
-  <View style={styles.container}>
-    <Image
-      source={require('../../assets/images/logo.jpeg')}
-      style={styles.logo}
-    />
+ return (
+    <View style={styles.container}>
+      
+      {/* Círculos decorativos */}
+      <View style={styles.circleTop} />
+      <View style={styles.circleBottom} />
 
-    <Text style={styles.title}>Login</Text>
+      {/* Logo */}
+      <Image 
+        source={require('../../assets/images/logo.jpeg')} 
+        style={styles.logo} 
+      />
 
-    <TextInput
-      placeholder="Digite seu email"
-      value={email}
-      onChangeText={setEmail}
-      style={styles.input}
-    />
+      {/* Texto de boas-vindas */}
+      <Text style={styles.welcome}>Bem-vindo de volta</Text>
+      <Text style={styles.subtitle}>Acesse sua conta para gerenciar as reservas</Text>
 
-    <TextInput
-      placeholder="Digite sua senha"
-      value={password}
-      onChangeText={setPassword}
-      secureTextEntry
-      style={styles.input}
-    />
+      {/* Inputs estilo linha */}
+      <TextInput
+        placeholder="Digite seu email"
+        placeholderTextColor="#aaa"
+        value={email}
+        onChangeText={setEmail}
+        style={styles.input}
+      />
 
-    <TouchableOpacity 
-      style={styles.button} 
-      onPress={handleLogin}
-      disabled={isLoading}
-    >
-      <Text style={styles.buttonText}>
-        {isLoading ? 'Entrando...' : 'Entrar'}
+      <TextInput
+        placeholder="Digite sua senha"
+        placeholderTextColor="#aaa"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        style={styles.input}
+      />
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Entrar</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.forgotPassword}>
+        Esqueceu a senha? <Text style={styles.link}>Redefinir</Text>
       </Text>
-    </TouchableOpacity>
-
-    <Text style={styles.forgotPassword}>
-      Esqueceu a senha? <Text style={styles.link}>REDEFINIR SENHA</Text>
-    </Text>
-
-    {statusMessage && (
-      <Text style={{ color: 'red', marginTop: 10 }}>{statusMessage}</Text>
-    )}
-  </View>
-);
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B1120',
-    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#0E1B30',
+    paddingHorizontal: 20,
   },
-  backgroundDecor: {
-    ...StyleSheet.absoluteFillObject,
-    overflow: 'hidden',
-  },
-  blob: {
+
+  /** Decorações circulares como no print */
+  circleTop: {
     position: 'absolute',
     width: 300,
     height: 300,
-    borderRadius: 150,
-    backgroundColor: 'rgba(56, 189, 248, 0.35)',
+    borderRadius: 300,
+    backgroundColor: '#1C3B70',
+    top: -120,
+    left: -80,
+    opacity: 0.4,
   },
-  blobTopLeft: {
-    top: -90,
-    left: -60,
-    backgroundColor: 'rgba(99, 102, 241, 0.42)',
+  circleBottom: {
+    position: 'absolute',
+    width: 260,
+    height: 260,
+    borderRadius: 260,
+    backgroundColor: '#1C3B70',
+    bottom: -100,
+    right: -60,
+    opacity: 0.35,
   },
-  blobBottomRight: {
-    bottom: -120,
-    right: -80,
-    backgroundColor: 'rgba(16, 185, 129, 0.38)',
-  },
-  content: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 24,
-  },
-  logoWrapper: {
-    width: 180,
-    height: 180,
-    borderRadius: 90,
-    backgroundColor: 'rgba(15, 23, 42, 0.35)',
-    borderWidth: 1,
-    borderColor: 'rgba(148, 163, 184, 0.18)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 20 },
-    shadowOpacity: 0.25,
-    shadowRadius: 30,
-    elevation: 12,
-  },
+
   logo: {
-    width: 160,
-    height: 160,
+    width: 140,
+    height: 140,
     resizeMode: 'cover',
-    borderRadius: 80,
-    overflow: 'hidden',
+    borderRadius: 70,
+    marginBottom: 10,
   },
-  title: {
-    fontSize: 28,
+
+  welcome: {
+    color: '#fff',
+    fontSize: 24,
     fontWeight: 'bold',
-    color: '#F8FAFC',
-    marginBottom: 8,
-    textAlign: 'center',
+    marginTop: 10,
   },
+
   subtitle: {
-    fontSize: 16,
-    color: 'rgba(226, 232, 240, 0.7)',
+    color: '#d0d0d0',
+    fontSize: 14,
     marginBottom: 30,
-    textAlign: 'center',
   },
-  inputsContainer: {
-    width: '100%',
-    gap: 16,
-    marginBottom: 28,
-  },
+
   input: {
-    width: '100%',
-    backgroundColor: 'rgba(15, 23, 42, 0.65)',
-    borderWidth: 1,
-    borderColor: 'rgba(148, 163, 184, 0.16)',
-    paddingVertical: 14,
-    paddingHorizontal: 18,
-    borderRadius: 14,
-    color: '#E2E8F0',
+    width: '90%',
+    borderBottomWidth: 1,
+    borderBottomColor: '#6AA9E9',
+    color: '#fff',
+    paddingVertical: 8,
+    marginBottom: 20,
     fontSize: 16,
   },
-  inputFocused: {
-    borderColor: '#22C55E',
-    shadowColor: '#22C55E',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.25,
-    shadowRadius: 16,
-    elevation: 8,
-  },
+
   button: {
-    backgroundColor: '#22C55E',
-    paddingVertical: 14,
-    borderRadius: 14,
+    backgroundColor: '#27AE60',
+    paddingVertical: 12,
+    borderRadius: 8,
+    width: '90%',
     alignItems: 'center',
-    width: '100%',
-    shadowColor: '#22C55E',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.35,
-    shadowRadius: 20,
-    elevation: 10,
+    marginTop: 10,
   },
-  buttonWrapper: {
-    width: '100%',
-    borderRadius: 14,
-  },
+
   buttonText: {
     color: '#fff',
-    fontWeight: 'bold',
     fontSize: 16,
+    fontWeight: 'bold',
   },
+
   forgotPassword: {
-    marginTop: 20,
-    color: 'rgba(226, 232, 240, 0.7)',
-    fontSize: 14,
+    marginTop: 15,
+    color: '#ccc',
   },
+
   link: {
-    color: '#38BDF8',
+    color: '#6AA9E9',
+    fontWeight: 'bold',
     textDecorationLine: 'underline',
-    fontWeight: '600',
   },
 });

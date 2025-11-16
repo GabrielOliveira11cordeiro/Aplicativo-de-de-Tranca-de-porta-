@@ -14,8 +14,8 @@ import {
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { buscarSalas } from "../services/CadastrarSala";
-import { reservarSala } from "../services/Reserva";
+import { buscarSalas } from "../../services/CadastrarSala";
+import { reservarSala } from "../../services/Reserva";
 
 interface SalaOption {
   label: string;

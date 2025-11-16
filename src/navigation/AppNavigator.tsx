@@ -7,8 +7,8 @@ import {
 import React from 'react';
 
 // 🔹 Telas
-import HistoricoReservas from '../screens/HistoricoReservas';
 import Login from '../screens/Login';
+import HistoricoReservas from '../screens/user/HistoricoReservas';
 
 // 🔹 Navegações separadas
 import AdminTabs from './AdminTabs';

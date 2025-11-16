@@ -3,10 +3,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // Telas do usuário
-import HistoricoReservas from '../screens/HistoricoReservas'; // nova tela
-import HomeUsuario from '../screens/HomeUsuario';
-import NotificacaoReserva from '../screens/NotificacaoReserva';
-import ReservarPorta from '../screens/Reservas';
+import HistoricoReservas from '../screens/user/HistoricoReservas'; // nova tela
+import HomeUsuario from '../screens/user/HomeUsuario';
+import NotificacaoReserva from '../screens/user/NotificacaoReserva';
+import ReservarPorta from '../screens/user/Reservas';
 
 const Tab = createBottomTabNavigator();
 

@@ -1,38 +1,105 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import { Text, TextInput, TextInputProps, View } from 'react-native';
+// src/components/Input.tsx
 
-// Define uma interface que estende as props padrão do TextInput
+import React, { Dispatch, SetStateAction } from 'react';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TextInputProps,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native';
+
+// --- 1. Definição da Interface (Props) ---
+
+/**
+ * Interface para o componente Input, estendendo as props nativas do TextInput.
+ */
 interface InputProps extends TextInputProps {
-    label?: string;
-    // O valor e onChangeText são obrigatórios para um campo de formulário
-    value: string;
-    onChangeText: Dispatch<SetStateAction<string>> | ((text: string) => void);
-    placeholder?: string;
-    // Props como secureTextEntry, keyboardType, editable, e maxLength
-    // são herdadas de TextInputProps, resolvendo os erros de tipagem (TS2322).
+  label?: string;
+  // O valor e onChangeText são obrigatórios para uso controlado
+  value: string;
+  onChangeText: Dispatch<SetStateAction<string>> | ((text: string) => void);
+  placeholder?: string;
+  
+  // Props de estilização para customização externa
+  containerStyle?: ViewStyle;
+  labelStyle?: TextStyle;
+  inputStyle?: TextStyle;
 }
 
 
-export default function Input({ label, value, onChangeText, placeholder, secureTextEntry, ...rest }: InputProps) {
+// --- 2. Componente Funcional ---
+
+export default function Input({
+  label,
+  value,
+  onChangeText,
+  placeholder,
+  secureTextEntry,
+  containerStyle,
+  labelStyle,
+  inputStyle,
+  ...rest
+}: InputProps) {
   return (
-    <View style={{ marginVertical: 8 }}>
-      {label ? <Text style={{ marginBottom: 4, fontWeight: '500', color: '#333' }}>{label}</Text> : null}
+    <View style={[styles.container, containerStyle]}>
+      {/* Rótulo (Label) opcional */}
+      {label && (
+        <Text style={[styles.label, labelStyle]}>
+          {label}
+        </Text>
+      )}
+
+      {/* Campo de Input */}
       <TextInput
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
+        placeholderTextColor="white" // Cinza sutil para o placeholder
         secureTextEntry={secureTextEntry}
-        // Passa todas as outras props (keyboardType, editable, maxLength, etc.)
-        {...rest} 
-        style={{
-          borderWidth: 1,
-          borderColor: '#ccc',
-          padding: 10,
-          borderRadius: 8,
-          backgroundColor: '#fff',
-          fontSize: 16,
-        }}
+        
+        // Aplica o estilo padrão e permite a sobrescrita externa
+        style={[styles.input, inputStyle]} 
+        
+        // Passa todas as outras props (keyboardType, maxLength, etc.)
+        {...rest}
       />
     </View>
   );
 }
+
+
+// --- 3. Estilos (StyleSheet) ---
+
+const styles = StyleSheet.create({
+  container: {
+    marginVertical: 8,
+  },
+
+  label: {
+    marginBottom: 6,
+    fontWeight: '600',
+    fontSize: 14,
+    color: '#ffff', // Texto escuro
+  },
+
+  input: {
+    backgroundColor: '#ffffff', // Fundo branco
+    borderWidth: 1,
+    borderColor: '#e5e7eb', // Borda cinza clara
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    fontSize: 16,
+    color: '#1f2937', // Texto digitado escuro
+    
+    // Sombra sutil (melhora a aparência no iOS/Android)
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1, // Sombra para Android
+  },
+});

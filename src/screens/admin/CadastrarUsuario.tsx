@@ -6,12 +6,12 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 
-import Input from '../components/Input';
-import { registerUserByadmin } from '../services/CadastroUsuario';
-import { validaCPF } from '../utils/validar';
+import Input from '../../components/Input';
+import { registerUserByadmin } from '../../services/CadastroUsuario';
+import { validaCPF } from '../../utils/validar';
 
 export default function Cadastro() {
   const [nome, setNome] = useState('');
@@ -84,9 +84,9 @@ export default function Cadastro() {
         <Text style={styles.title}>Cadastrar Novo Usuário</Text>
         <Text style={styles.subtitle}>Preencha os dados do novo membro.</Text>
 
-        <Input label="Nome Completo" value={nome} onChangeText={setNome} editable={!isLoading} />
-        <Input label="CPF" keyboardType="numeric" value={cpf} onChangeText={setCpf} editable={!isLoading} />
-        <Input label="Idade" keyboardType="numeric" value={idade} onChangeText={setIdade} editable={!isLoading} />
+        <Input label="Nome Completo" value={nome} onChangeText={setNome} editable={!isLoading} labelStyle={styles.textWhite} inputStyle={styles.inputText}/>
+        <Input label="CPF" keyboardType="numeric" value={cpf} onChangeText={setCpf} editable={!isLoading} labelStyle={styles.textWhite} inputStyle={styles.inputText}/>
+        <Input label="Idade" keyboardType="numeric" value={idade} onChangeText={setIdade} editable={!isLoading} labelStyle={styles.textWhite} inputStyle={styles.inputText}/>
 
         <Input
           label="Nível de Acesso"
@@ -96,13 +96,13 @@ export default function Cadastro() {
           value={accessLevel}
           onChangeText={setAccessLevel}
           editable={!isLoading}
+          labelStyle={styles.textWhite}
+          inputStyle={styles.inputText}
         />
 
-        <Input label="E-mail" keyboardType="email-address" value={email} onChangeText={setEmail} editable={!isLoading} />
+        <Input label="E-mail" keyboardType="email-address" value={email} onChangeText={setEmail} editable={!isLoading} labelStyle={styles.textWhite} inputStyle={styles.inputText}/>
+        <Input label="Senha" secureTextEntry value={password} onChangeText={setPassword} editable={!isLoading} labelStyle={styles.textWhite} inputStyle={styles.inputText}/>
 
-        <Input label="Senha" secureTextEntry value={password} onChangeText={setPassword} editable={!isLoading} />
-
-        {/* 🔥 Correção aqui */}
         {statusMessage && (
           <View
             style={[
@@ -136,7 +136,7 @@ export default function Cadastro() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  backgroundColor: '#0B1120',
+    backgroundColor: '#0B1120',
   },
   content: {
     padding: 24,
@@ -153,15 +153,23 @@ const styles = StyleSheet.create({
     shadowRadius: 20,
     elevation: 10,
   },
+
+  textWhite: {
+    color: "#fff",
+  },
+  inputText: {
+    color: "#fff",
+  },
+
   title: {
     fontSize: 26,
     fontWeight: "700",
-    color: "#F8FAFC",
+    color: "#fff",
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: "#f8fafc",
+    color: "#fff",
     marginBottom: 18,
   },
   statusBox: {
@@ -182,6 +190,7 @@ const styles = StyleSheet.create({
   statusText: {
     color: "#fff",
     textAlign: "center",
+    fontWeight: "bold",
   },
   button: {
     backgroundColor: "#3b82f6",
