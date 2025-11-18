@@ -63,7 +63,7 @@ export default function CadastrarSala() {
             onChangeText={setNome}
             placeholder="Ex: Sala 101"
             placeholderTextColor="#FFFFFF"
-            inputStyle={{ color: "#FFFFFF" }}
+            inputStyle={StyleSheet.flatten([styles.Input])}
           />
 
           <Input
@@ -72,7 +72,7 @@ export default function CadastrarSala() {
             onChangeText={setDescricao}
             placeholder="Ex: Sala de reunião"
             placeholderTextColor="#FFFFFF"
-            inputStyle={{ color: "#FFFFFF" }}
+            inputStyle={ StyleSheet.flatten([styles.Input]) }
           />
 
           <Input
@@ -82,7 +82,7 @@ export default function CadastrarSala() {
             placeholder="1, 2 ou 3"
             keyboardType="numeric"
             placeholderTextColor="#FFFFFF"
-            inputStyle={{ color: "#FFFFFF" }}
+            inputStyle={ StyleSheet.flatten([styles.Input]) }
           />
 
           <Button title="Cadastrar" onPress={handleCadastrar} />
@@ -96,6 +96,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#0B1120",
+  },
+  Input: {
+    color: "#fff",
+    borderColor: "#374151",
+    backgroundColor: "#1F2937",
   },
   content: {
     padding: 24,

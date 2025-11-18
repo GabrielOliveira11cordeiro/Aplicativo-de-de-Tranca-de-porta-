@@ -159,6 +159,8 @@ const styles = StyleSheet.create({
   },
   inputText: {
     color: "#fff",
+    borderColor: "#374151",
+    backgroundColor: "#1F2937",
   },
 
   title: {
@@ -193,7 +195,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   button: {
-    backgroundColor: "#3b82f6",
+    backgroundColor: "#22C55E",
     padding: 16,
     borderRadius: 12,
     marginTop: 10,

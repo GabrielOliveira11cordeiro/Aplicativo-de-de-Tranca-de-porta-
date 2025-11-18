@@ -162,16 +162,19 @@ export default function HistoricoPortas({ route }: HistoricoPortasProps) {
           placeholder="Filtrar por usuário"
           value={filtroUsuario}
           onChangeText={setFiltroUsuario}
+          style={styles.input}
         />
         <Input
           placeholder="Filtrar por status (Ativa/Concluída/Cancelada)"
           value={filtroStatus}
           onChangeText={setFiltroStatus}
+          style={styles.input}
         />
         <Input
           placeholder="Filtrar por data (dd/mm/aaaa)"
           value={filtroData} // Usando o estado filtroData
           onChangeText={setFiltroData}
+          style={styles.input}
         />
       </View>
 
@@ -223,6 +226,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#0d1b2a',
     padding: 24,
   },
+  input: {
+    color: '#fff',
+    borderColor: '#374151',
+    backgroundColor: '#1F2937',
+  },  
 
   title: { 
     fontSize: 26,
