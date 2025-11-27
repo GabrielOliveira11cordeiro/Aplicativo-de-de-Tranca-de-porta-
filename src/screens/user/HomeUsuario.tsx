@@ -60,13 +60,13 @@ export default function HomeUsuario() {
     loadReservas();
   }, []);
 
-  // 💡 ATUALIZAÇÃO: Rota alterada de 'Reservar' para 'ReservarPorta'
+  
   const handleReservarPorta = () => navigation.navigate('ReservarPorta'); 
   
-  // 💡 Rota 'HistoricoReservas' já estava correta.
+
   const handleHistorico = () => navigation.navigate('HistoricoReservas');
   
-  // 💡 Navegando para o Login (assumindo que ele está fora do Tab Navigator, em um Stack)
+  
   const handleLogout = () => navigation.navigate('Login');
 
   if (loading) {

@@ -2,14 +2,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAuth } from "firebase/auth";
 import { collection, doc, getDocs, getFirestore, setDoc } from "firebase/firestore";
 
-// Interface dos dados da sala
+
 export interface CadastrarSalaData {
   nomeSala: string;
   descricao: string;
-  salaacessolevel: string; // nível da sala (1, 2 ou 3)
+  salaacessolevel: string; 
 }
 
-// Função para cadastrar sala
+
 export const cadastrarSala = async (data: CadastrarSalaData) => {
   try {
     const db = getFirestore();
@@ -21,13 +21,13 @@ export const cadastrarSala = async (data: CadastrarSalaData) => {
       return { success: false, message: "Usuário não autenticado." };
     }
 
-    // Obtém nível do usuário do AsyncStorage (deve ser salvo no login)
+    
     const userAccessLevelStr = await AsyncStorage.getItem("userAccessLevel");
     const userAccessLevel = userAccessLevelStr ? Number(userAccessLevelStr) : 3;
 
     console.log("👤 Nível do usuário logado:", userAccessLevel);
 
-    // Apenas admins (nível 1) podem cadastrar salas
+    
     if (userAccessLevel !== 1) {
       console.warn("Usuário sem permissão para criar salas.");
       return {
@@ -36,7 +36,7 @@ export const cadastrarSala = async (data: CadastrarSalaData) => {
       };
     }
 
-    // Cadastra a sala no Firestore
+    
     const salaRef = doc(db, "salas", data.nomeSala);
     await setDoc(salaRef, {
       nomeSala: data.nomeSala,
@@ -55,7 +55,7 @@ export const cadastrarSala = async (data: CadastrarSalaData) => {
   }
 };
 
-// Interface e função para buscar salas filtradas pelo nível do usuário
+
 export interface SalaOption {
   label: string;
   value: string;
@@ -73,16 +73,16 @@ export const buscarSalas = async (): Promise<SalaOption[]> => {
       return [];
     }
 
-    // Lê o nível do usuário do AsyncStorage
+    
     const userAccessLevelStr = await AsyncStorage.getItem("userAccessLevel");
     const nivelAcessoUsuario = userAccessLevelStr ? String(userAccessLevelStr) : "3";
 
     console.log("👤 Nível do usuário logado:", nivelAcessoUsuario);
 
-    // Busca todas as salas no Firestore
+  
     const salasSnapshot = await getDocs(collection(db, "salas"));
 
-    // Filtra salas de acordo com o nível do usuário
+  
     const salasFiltradas: SalaOption[] = salasSnapshot.docs
       .map((doc) => {
         const dados = doc.data();

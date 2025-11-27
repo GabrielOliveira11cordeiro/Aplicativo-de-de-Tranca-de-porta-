@@ -1,4 +1,4 @@
-// src/screens/admin/HistoricoPortas.tsx
+
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { buscarTodasReservas, HistoricoItemAdmin } from '../../services/HistoricoReservasadmin';
 
-// Importa o componente customizado adaptado ao tema escuro
+
 import Input from '@/src/components/Input';
 
 interface HistoricoItem extends HistoricoItemAdmin {}
@@ -34,17 +34,16 @@ export default function HistoricoPortas({ route }: HistoricoPortasProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Filtros
+  
   const [filtroUsuario, setFiltroUsuario] = useState('');
   const [filtroStatus, setFiltroStatus] = useState('');
   const [filtroPeriodo, setFiltroPeriodo] = useState('');
   const [ordenacao, setOrdenacao] = useState('recent');
   
-  // O filtroData foi removido do estado, pois o filtro é feito por periodo
-  // Caso deseje o filtro por data (dd/mm/aaaa) utilize um estado aqui
-  const [filtroData, setFiltroData] = useState(''); // Estado para o input de data
+  
+  const [filtroData, setFiltroData] = useState(''); 
 
-  // Menus animados (mantidos)
+  
   const [showFilterMenu, setShowFilterMenu] = useState(false);
   const [showSortMenu, setShowSortMenu] = useState(false);
   const filterAnim = useRef(new Animated.Value(0)).current;
@@ -72,7 +71,7 @@ export default function HistoricoPortas({ route }: HistoricoPortasProps) {
 
   useEffect(() => { loadReservas(); }, []);
 
-  // Animações popover (mantidas)
+  
   useEffect(() => {
     Animated.timing(filterAnim, { toValue: showFilterMenu ? 1 : 0, duration: 200, useNativeDriver: true }).start();
   }, [showFilterMenu]);
@@ -102,10 +101,10 @@ export default function HistoricoPortas({ route }: HistoricoPortasProps) {
     return true;
   };
 
-  // Filtro e ordenação (mantidos)
+  
   const historicoFiltrado = useMemo(() => {
     let result = historico.filter(item => {
-      // Data de filtro pelo input (se houver, adicione aqui a lógica de comparação com filtroData)
+      
       
       return (
         (filtroUsuario ? item.usuario.toLowerCase().includes(filtroUsuario.toLowerCase()) : true) &&
@@ -172,7 +171,7 @@ export default function HistoricoPortas({ route }: HistoricoPortasProps) {
         />
         <Input
           placeholder="Filtrar por data (dd/mm/aaaa)"
-          value={filtroData} // Usando o estado filtroData
+          value={filtroData} 
           onChangeText={setFiltroData}
           style={styles.input}
         />
@@ -243,7 +242,7 @@ const styles = StyleSheet.create({
 
   filtros: { marginBottom: 10 },
 
-  // **REMOVIDO** styles.input não é mais necessário aqui.
+  
 
   card: {
     backgroundColor: '#1C3B70',
@@ -318,7 +317,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  loadingContainer: { // Adicionando estilo para o loading/error
+  loadingContainer: { 
     flex: 1,
     backgroundColor: '#0d1b2a',
     justifyContent: 'center',

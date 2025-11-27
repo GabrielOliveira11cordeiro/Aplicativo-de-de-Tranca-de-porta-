@@ -1,4 +1,4 @@
-// src/screens/Login.tsx
+
 
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
@@ -10,11 +10,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-// Certifique-se de que o caminho para AppNavigator está correto
+
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { loginUser } from '../services/LoginService';
 
-// Tipagem da navegação baseada no AppNavigator
+
 type LoginScreenNavigationProp = NavigationProp<RootStackParamList, 'Login'>;
 
 export default function LoginScreen() {
@@ -22,7 +22,7 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false); // Adicionado para UX
+  const [isLoading, setIsLoading] = useState(false); 
 
   const handleLogin = async () => {
     setStatusMessage(null);
@@ -32,16 +32,16 @@ export default function LoginScreen() {
       return;
     }
 
-    setIsLoading(true); // Inicia o carregamento
+    setIsLoading(true); 
 
     try {
-      // accessLevel será 1 (Admin), 2 ou 3 (User), ou 0 (Unknown)
+      
       const accessLevel = await loginUser(email, password);
 
-    // 🔑 LÓGICA DE NAVEGAÇÃO CORRIGIDA: compara com NÚMEROS
-    if (accessLevel === 1) { // Nível 1: Admin
+    
+    if (accessLevel === 1) { 
       navigation.navigate("AdminMain");
-    } else{ // Nível 2 ou 3: Usuário
+    } else{ 
       navigation.navigate("UserMain");
     }
    
@@ -61,13 +61,13 @@ export default function LoginScreen() {
           errorMessage = 'Muitas tentativas de login. Conta temporariamente bloqueada.';
           break;
         default:
-          // Pega o corpo da mensagem de erro se disponível
+          
           errorMessage = error.message; 
           break;
       }
       setStatusMessage(`Erro: ${errorMessage}`);
     } finally {
-        setIsLoading(false); // Finaliza o carregamento, independentemente do resultado
+        setIsLoading(false); 
     }
   };
 
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
 
-  /** Decorações circulares como no print */
+  
   circleTop: {
     position: 'absolute',
     width: 300,
